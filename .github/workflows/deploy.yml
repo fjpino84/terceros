@@ -43,11 +43,11 @@ jobs:
 
   deploy:
     if: github.ref == 'refs/heads/main'
+    environment:
+      name: github-pages
+      url: https://fjpino84.github.io/terceros/
     runs-on: ubuntu-latest
     needs: build
     steps:
       - name: Deploy to GitHub Pages
-        id: deployment
         uses: actions/deploy-pages@v4
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
