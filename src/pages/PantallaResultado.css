@@ -39,7 +39,7 @@
 }
 
 .resultado__card--rechazo {
-  border-top-color: var(--danger-strong);
+  border-top-color: #e8a500;
 }
 
 .resultado__icon {
@@ -56,8 +56,8 @@
 }
 
 .resultado__icon--rechazo {
-  background: var(--danger-bg);
-  color: var(--danger-strong);
+  background: rgba(232, 165, 0, 0.14);
+  color: #e8a500;
 }
 
 .resultado__card h1 {

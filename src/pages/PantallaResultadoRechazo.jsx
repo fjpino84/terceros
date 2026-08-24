@@ -33,7 +33,7 @@ export default function PantallaResultadoRechazo() {
             <span className="resultado__icon resultado__icon--rechazo">
               <Icon nombre="xCircle" size={28} />
             </span>
-            <h1>Siniestro Rechazado</h1>
+            <h1>Siniestro Pendiente de Revisión</h1>
             <p className="resultado__lead">
               Muchas gracias por ingresar la información requerida. Lamentablemente, hemos tenido
               problemas al procesar sus documentos. Para poder resolverlo, sugerimos se pueda acercar a
