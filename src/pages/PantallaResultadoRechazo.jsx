@@ -7,18 +7,18 @@ import './PantallaResultado.css';
 const PROXIMOS_PASOS = [
   {
     icono: 'location',
-    titulo: 'Acercate a una oficina',
-    texto: 'Un asesor puede revisar tu caso en persona y explicarte los motivos del rechazo.',
+    titulo: 'Acercate a una sucursal',
+    texto: 'Nuestros asesores pueden ayudarte a resolver este inconveniente de forma presencial.',
   },
   {
-    icono: 'id',
-    titulo: 'Llevá tu documentación',
-    texto: 'DNI, cédula del vehículo y cualquier presupuesto o factura relacionados al siniestro.',
+    icono: 'bell',
+    titulo: 'Contactanos por WhatsApp',
+    texto: 'Envíanos un mensaje a través de WhatsApp para resolver tus dudas.',
   },
   {
     icono: 'help',
-    titulo: '¿Tenés dudas?',
-    texto: 'Nuestro equipo de atención está disponible para ayudarte a resolver tu caso.',
+    titulo: 'Llamanos al 758920211',
+    texto: 'También puedes contactarte con nosotros por teléfono durante el horario de atención.',
   },
 ];
 
@@ -35,8 +35,10 @@ export default function PantallaResultadoRechazo() {
             </span>
             <h1>Siniestro Rechazado</h1>
             <p className="resultado__lead">
-              Lamentamos informarte que tu siniestro fue rechazado. Tus documentos no pudieron ser
-              validados por nuestro sistema inteligente.
+              Muchas gracias por ingresar la información requerida. Lamentablemente, hemos tenido
+              problemas al procesar sus documentos. Para poder resolverlo, sugerimos se pueda acercar a
+              algunas de nuestras sucursales. Cualquier duda o consulta, puede contactarse con nosotros
+              a nuestro WhatsApp o llamando al 758920211.
             </p>
             <div className="resultado__ref">
               <span>N° de referencia</span>
