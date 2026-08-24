@@ -1,16 +1,86 @@
-# React + Vite
+# LISA vigIA - Insurance Claims Portal Mockup
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+> A professional mockup of an insurance claims portal where third parties can report accidents and submit documentation for claims processing.
 
-Currently, two official plugins are available:
+## 👀 View the Live Demo
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+**See the mockup in action:** https://fjpino84.github.io/terceros/
 
-## React Compiler
+Just click the link above — no installation needed!
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 📋 Features
 
-## Expanding the Oxlint configuration
+- **Client Portal**: User-friendly interface for submitting claims
+  - Initial data form (DNI, license plates)
+  - Document upload (ID, license, quote, coverage, police report)
+  - Result page with next steps
+  
+- **LISA Console**: Internal AI analysis dashboard
+  - Real-time document validation with OCR simulation
+  - Business rules verification
+  - Fraud detection alerts
+  - Sequential rule execution with animations
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+- **Two Scenarios**:
+  - ✅ **Approved**: All documents valid, claim accepted
+  - ⏳ **Pending Review**: Documents require attention, shows orange/yellow warning state
+
+## 🛠 Tech Stack
+
+- **React 18** with Vite
+- **CSS3 Native** (no external dependencies)
+- **Context API** for state management
+- **localStorage** for session persistence
+- Responsive design with rem-based sizing
+- Custom component library (no UI framework)
+
+## 🚀 Getting Started (Local Development)
+
+```bash
+# Clone the repository
+git clone https://github.com/fjpino84/terceros.git
+cd terceros/lisa-vigia
+
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
+```
+
+Then open http://localhost:5183/ in your browser.
+
+## 📦 Build for Production
+
+```bash
+npm run build
+```
+
+The optimized app will be in the `dist/` folder.
+
+## 📸 Mockup Highlights
+
+### Client Experience
+- Clean, institutional design matching real insurance company websites
+- Step-by-step progress indicator (3 steps)
+- Clear error messaging and validation
+- Professional footer with company branding
+
+### LISA Analysis Console
+- Document analysis with visual progress
+- Automated business rule validation:
+  - License plate matching
+  - Temporal validity (±3 days tolerance)
+  - Ownership verification
+  - Sworn statement validation
+  - Document integrity checks
+- Fraud detection pipeline
+- Color-coded results (green for pass, orange for pending, red for issues)
+
+## 📝 License
+
+This is a mockup for demonstration purposes.
+
+---
+
+Built with ❤️ for insurance claims processing innovation.
