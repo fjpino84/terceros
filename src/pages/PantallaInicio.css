@@ -1,0 +1,161 @@
+.inicio {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3.2rem;
+  background:
+    radial-gradient(60rem 40rem at 15% -10%, rgba(47, 191, 196, 0.14), transparent),
+    radial-gradient(50rem 40rem at 110% 10%, rgba(91, 63, 166, 0.14), transparent),
+    var(--paper);
+}
+
+.inicio__panel {
+  width: 100%;
+  max-width: 68rem;
+  background: var(--surface);
+  border: 0.1rem solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-float);
+  padding: 4.8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+}
+
+.inicio__brands {
+  display: flex;
+  align-items: center;
+  gap: 1.6rem;
+  margin-bottom: 0.8rem;
+}
+
+.inicio__brand-logo {
+  height: 4.4rem;
+  width: auto;
+}
+
+.inicio__brand-logo--lisa {
+  height: 3.6rem;
+  filter: drop-shadow(0 0.2rem 0.4rem rgba(15, 42, 74, 0.15));
+}
+
+.inicio__brand-x {
+  color: var(--ink-faint);
+  font-size: 1.8rem;
+}
+
+.inicio__eyebrow {
+  font-size: 1.3rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--lisa-blue);
+}
+
+.inicio__title {
+  font-size: 3.6rem;
+  font-weight: 800;
+  line-height: 1.1;
+  color: var(--navy-900);
+}
+
+.inicio__lead {
+  font-size: 1.6rem;
+  color: var(--ink-muted);
+  max-width: 58rem;
+  line-height: 1.6;
+}
+
+.inicio__scenarios {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  margin-top: 1.6rem;
+}
+
+.scenario-card {
+  display: flex;
+  align-items: center;
+  gap: 1.6rem;
+  padding: 2rem;
+  border-radius: var(--radius-md);
+  border: 0.15rem solid var(--border);
+  background: var(--surface);
+  text-align: left;
+  transition: border-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.scenario-card:hover {
+  transform: translateY(-0.2rem);
+  box-shadow: var(--shadow-card);
+}
+
+.scenario-card--exito:hover {
+  border-color: var(--success-strong);
+}
+
+.scenario-card--rechazo:hover {
+  border-color: var(--danger-strong);
+}
+
+.scenario-card__icon {
+  display: grid;
+  place-items: center;
+  width: 4.8rem;
+  height: 4.8rem;
+  border-radius: 999px;
+  flex-shrink: 0;
+}
+
+.scenario-card--exito .scenario-card__icon {
+  background: var(--success-bg);
+  color: var(--success-strong);
+}
+
+.scenario-card--rechazo .scenario-card__icon {
+  background: var(--danger-bg);
+  color: var(--danger-strong);
+}
+
+.scenario-card__body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.scenario-card__title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.7rem;
+  color: var(--navy-900);
+}
+
+.scenario-card__desc {
+  font-size: 1.4rem;
+  color: var(--ink-muted);
+  line-height: 1.5;
+}
+
+.scenario-card__arrow {
+  color: var(--ink-faint);
+  flex-shrink: 0;
+}
+
+.inicio__foot {
+  margin-top: 1.2rem;
+  font-size: 1.3rem;
+  color: var(--ink-faint);
+  text-align: center;
+}
+
+@media (max-width: 640px) {
+  .inicio__panel {
+    padding: 2.8rem 2rem;
+  }
+
+  .inicio__title {
+    font-size: 2.8rem;
+  }
+}

@@ -1,0 +1,151 @@
+.analisis-lisa {
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+  max-width: 120rem;
+  height: 100%;
+}
+
+.analisis-lisa__status {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  padding: 1.6rem 2.4rem;
+  border-radius: var(--radius-md);
+  border: 0.1rem solid;
+  flex-shrink: 0;
+}
+
+.analisis-lisa__status--neutro {
+  background: var(--dark-surface);
+  border-color: var(--dark-border);
+}
+
+.analisis-lisa__status--pendiente {
+  background: rgba(146, 98, 10, 0.14);
+  border-color: rgba(146, 98, 10, 0.4);
+}
+
+.analisis-lisa__status--ok {
+  background: rgba(27, 138, 90, 0.12);
+  border-color: rgba(27, 138, 90, 0.35);
+}
+
+.analisis-lisa__status--error {
+  background: rgba(194, 59, 59, 0.12);
+  border-color: rgba(194, 59, 59, 0.35);
+}
+
+.analisis-lisa__status-eyebrow {
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--dark-ink-muted);
+  margin-bottom: 0.6rem;
+}
+
+.analisis-lisa__status h1 {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: var(--dark-ink);
+}
+
+.analisis-lisa__status--pendiente h1 {
+  color: #f0c26a;
+}
+
+.analisis-lisa__status--ok h1 {
+  color: #6fd6a5;
+}
+
+.analisis-lisa__status--error h1 {
+  color: #f39a9a;
+}
+
+.analisis-lisa__status-desc {
+  margin-top: 0.3rem;
+  font-size: 1.3rem;
+  color: var(--dark-ink-muted);
+  max-width: 56rem;
+}
+
+.analisis-lisa__progress {
+  margin-top: 0.8rem;
+  width: 32rem;
+  max-width: 100%;
+  height: 0.5rem;
+  border-radius: 999px;
+  background: var(--dark-surface-raised);
+  overflow: hidden;
+}
+
+.analisis-lisa__progress-fill {
+  height: 100%;
+  border-radius: inherit;
+  background: var(--lisa-gradient);
+  transition: width 0.4s ease;
+}
+
+.analisis-lisa__status-ref {
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.analisis-lisa__status-ref span {
+  display: block;
+  font-size: 1.1rem;
+  color: var(--dark-ink-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.analisis-lisa__status-ref strong {
+  font-family: var(--font-mono);
+  font-size: 1.6rem;
+  color: var(--dark-ink);
+}
+
+.analisis-lisa__rows {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.analisis-lisa__section--rules {
+  flex-shrink: 0;
+}
+
+.analisis-lisa__rules-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0.8rem;
+}
+
+.analisis-lisa__cta {
+  display: flex;
+  justify-content: flex-end;
+  flex-shrink: 0;
+}
+
+@media (max-width: 1100px) {
+  .analisis-lisa__rules-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 700px) {
+  .analisis-lisa__status {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .analisis-lisa__status-ref {
+    text-align: left;
+  }
+
+  .analisis-lisa__rules-grid {
+    grid-template-columns: 1fr;
+  }
+}

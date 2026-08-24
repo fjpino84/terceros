@@ -1,0 +1,189 @@
+.lisa-console {
+  height: 100vh;
+  background: var(--dark-bg);
+  color: var(--dark-ink);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.lisa-console__topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.2rem 3.2rem;
+  background: var(--dark-surface);
+  border-bottom: 0.1rem solid var(--dark-border);
+}
+
+.lisa-console__brand {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.lisa-console__brand-logo {
+  height: 3.4rem;
+  width: auto;
+}
+
+.lisa-console__brand-divider {
+  width: 0.1rem;
+  height: 2rem;
+  background: var(--dark-border);
+}
+
+.lisa-console__brand-context {
+  font-size: 1.3rem;
+  color: var(--dark-ink-muted);
+}
+
+.lisa-console__topbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 1.6rem;
+  color: var(--dark-ink-muted);
+}
+
+.lisa-console__ref {
+  font-family: var(--font-mono);
+  font-size: 1.3rem;
+  letter-spacing: 0.02em;
+}
+
+.lisa-console__body {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 26rem 1fr;
+  min-height: 0;
+}
+
+.lisa-console__sidebar {
+  border-right: 0.1rem solid var(--dark-border);
+  padding: 2rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2.4rem;
+}
+
+.lisa-console__assistant {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.8rem;
+  padding: 1.6rem 1.2rem 1.8rem;
+  border-radius: var(--radius-md);
+  background: var(--dark-surface-raised);
+  overflow: hidden;
+}
+
+.lisa-console__assistant::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 16rem;
+  height: 16rem;
+  border-radius: 999px;
+  background: var(--lisa-gradient);
+  opacity: 0.28;
+  filter: blur(4rem);
+  pointer-events: none;
+}
+
+.lisa-console__assistant-logo {
+  position: relative;
+  width: 9.6rem;
+  height: 9.6rem;
+  object-fit: contain;
+  border-radius: var(--radius-lg);
+  background: var(--dark-surface);
+  border: 0.1rem solid var(--dark-border);
+  padding: 1.2rem;
+}
+
+.lisa-console__assistant-name {
+  position: relative;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 2rem;
+}
+
+.lisa-console__assistant-tag {
+  position: relative;
+  font-size: 1.25rem;
+  color: var(--dark-ink-muted);
+}
+
+.lisa-console__nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.lisa-console__nav-item {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  padding: 1.1rem 1.2rem;
+  border-radius: var(--radius-sm);
+  border: none;
+  background: transparent;
+  color: var(--dark-ink-muted);
+  font-size: 1.5rem;
+  font-weight: 500;
+  text-align: left;
+}
+
+.lisa-console__nav-item--active {
+  background: var(--dark-surface-raised);
+  color: var(--dark-ink);
+}
+
+.lisa-console__status {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  font-size: 1.3rem;
+  color: var(--dark-ink-muted);
+}
+
+.lisa-console__status-dot {
+  width: 0.8rem;
+  height: 0.8rem;
+  border-radius: 999px;
+  background: var(--lisa-teal);
+  box-shadow: 0 0 0 0.3rem rgba(47, 191, 196, 0.2);
+}
+
+.lisa-console__content {
+  padding: 2rem 3.2rem;
+  min-height: 0;
+  overflow-y: auto;
+}
+
+@media (max-width: 900px) {
+  .lisa-console__body {
+    grid-template-columns: 1fr;
+  }
+
+  .lisa-console__sidebar {
+    border-right: none;
+    border-bottom: 0.1rem solid var(--dark-border);
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .lisa-console__status {
+    margin-top: 0;
+  }
+
+  .lisa-console__content {
+    padding: 2.4rem 1.6rem;
+  }
+}

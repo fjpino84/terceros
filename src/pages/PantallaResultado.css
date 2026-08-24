@@ -1,0 +1,327 @@
+.resultado {
+  width: 100%;
+  max-width: 108rem;
+}
+
+.resultado--exito {
+  display: grid;
+  grid-template-columns: 1fr 34rem;
+  gap: 1.6rem;
+  align-items: start;
+}
+
+.resultado--rechazo {
+  display: grid;
+  grid-template-columns: 1fr 32rem;
+  gap: 1.6rem;
+  align-items: start;
+}
+
+.resultado__principal,
+.rechazo__principal {
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+}
+
+.resultado__card {
+  background: var(--surface);
+  border: 0.1rem solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  padding: 2.8rem 3.2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  text-align: center;
+  border-top: 0.4rem solid var(--success-strong);
+}
+
+.resultado__card--rechazo {
+  border-top-color: var(--danger-strong);
+}
+
+.resultado__icon {
+  display: grid;
+  place-items: center;
+  width: 6rem;
+  height: 6rem;
+  border-radius: 999px;
+}
+
+.resultado__icon--exito {
+  background: var(--success-bg);
+  color: var(--success-strong);
+}
+
+.resultado__icon--rechazo {
+  background: var(--danger-bg);
+  color: var(--danger-strong);
+}
+
+.resultado__card h1 {
+  font-size: 2.1rem;
+  font-weight: 800;
+  color: var(--navy-900);
+}
+
+.resultado__lead {
+  font-size: 1.4rem;
+  color: var(--ink-muted);
+  line-height: 1.55;
+  max-width: 46rem;
+}
+
+.resultado__ref {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  padding-top: 0.8rem;
+  border-top: 0.1rem dashed var(--border);
+  width: 100%;
+}
+
+.resultado__ref span {
+  font-size: 1.1rem;
+  color: var(--ink-faint);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.resultado__ref strong {
+  font-family: var(--font-mono);
+  font-size: 1.5rem;
+  color: var(--ink);
+}
+
+.resultado__acciones {
+  display: flex;
+  gap: 1.2rem;
+  margin-top: 0.4rem;
+}
+
+.resultado__acciones--rechazo {
+  justify-content: center;
+}
+
+.rechazo__pasos {
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+  padding: 2rem 2.2rem;
+  border-radius: var(--radius-lg);
+  background: linear-gradient(165deg, var(--navy-900) 0%, var(--navy-800) 100%);
+  color: #fff;
+}
+
+.rechazo__pasos-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.5rem;
+}
+
+.rechazo__pasos ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+}
+
+.rechazo__pasos li {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.rechazo__pasos li strong {
+  display: block;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 0.2rem;
+}
+
+.rechazo__pasos-icon {
+  display: grid;
+  place-items: center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--lisa-teal);
+  flex-shrink: 0;
+}
+
+.rechazo__pasos-text {
+  font-size: 1.2rem;
+  color: rgba(255, 255, 255, 0.6);
+  line-height: 1.45;
+}
+
+.resultado__reiniciar {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  background: none;
+  border: none;
+  color: var(--ink-faint);
+  font-size: 1.2rem;
+}
+
+.resultado__reiniciar:hover {
+  color: var(--navy-800);
+}
+
+/* Encuesta */
+.encuesta {
+  background: var(--surface);
+  border: 0.1rem solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 2rem 2.2rem;
+  display: flex;
+  align-items: center;
+}
+
+.encuesta form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.encuesta h2 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--navy-900);
+  text-align: center;
+  margin-bottom: 1.4rem;
+  line-height: 1.35;
+}
+
+.encuesta__caras {
+  display: flex;
+  justify-content: center;
+  gap: 0.8rem;
+  margin-bottom: 1.6rem;
+  width: 100%;
+}
+
+.encuesta__cara {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem 0.6rem;
+  border-radius: var(--radius-md);
+  border: 0.15rem solid var(--border);
+  background: var(--surface);
+  transition: border-color 0.15s ease, transform 0.15s ease, background 0.15s ease;
+}
+
+.encuesta__cara:hover {
+  transform: translateY(-0.2rem);
+}
+
+.encuesta__cara--activa {
+  border-color: var(--cara-color);
+  background: color-mix(in srgb, var(--cara-color) 12%, var(--surface));
+}
+
+.encuesta__emoji {
+  font-size: 2.4rem;
+  line-height: 1;
+}
+
+.encuesta__etiqueta {
+  font-size: 1.05rem;
+  color: var(--ink-muted);
+  font-weight: 500;
+  text-align: center;
+}
+
+.encuesta__gracias {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+  color: var(--success-strong);
+  font-weight: 600;
+  font-size: 1.4rem;
+  text-align: center;
+}
+
+/* Promo */
+.promo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.6rem;
+  padding: 1.8rem 2.4rem;
+  border-radius: var(--radius-lg);
+  background: var(--lisa-gradient);
+  color: #fff;
+  text-decoration: none;
+}
+
+.promo__eyebrow {
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  opacity: 0.85;
+  margin-bottom: 0.4rem;
+}
+
+.promo__text h3 {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 0.4rem;
+  line-height: 1.3;
+}
+
+.promo__text p {
+  font-size: 1.2rem;
+  opacity: 0.92;
+  max-width: 34rem;
+}
+
+.promo__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  flex-shrink: 0;
+  padding: 1rem 1.6rem;
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.16);
+  font-weight: 700;
+  font-size: 1.25rem;
+  white-space: nowrap;
+}
+
+@media (max-width: 900px) {
+  .resultado--exito {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .resultado__card,
+  .resultado__card--solo {
+    padding: 2.2rem;
+  }
+
+  .promo {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .encuesta__caras {
+    flex-wrap: wrap;
+  }
+}

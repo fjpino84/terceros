@@ -1,0 +1,137 @@
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+:root {
+  /* Marca institucional — Seguros Horizonte */
+  --navy-900: #0a1f38;
+  --navy-800: #0f2a4a;
+  --navy-700: #17395f;
+  --navy-100: #e7edf6;
+
+  /* Marca LISA — gradiente teal → azul → púrpura */
+  --lisa-teal: #2fbfc4;
+  --lisa-blue: #2e7fd6;
+  --lisa-purple: #5b3fa6;
+  --lisa-gradient: linear-gradient(115deg, var(--lisa-teal) 0%, var(--lisa-blue) 55%, var(--lisa-purple) 100%);
+
+  /* Neutros con leve sesgo azul */
+  --paper: #f6f8fb;
+  --surface: #ffffff;
+  --surface-sunken: #eef2f8;
+  --border: #dde4ee;
+  --ink: #16233a;
+  --ink-muted: #55637c;
+  --ink-faint: #8896ac;
+
+  /* Semántico */
+  --success-bg: #e7f5ec;
+  --success-ink: #146c43;
+  --success-strong: #1b8a5a;
+  --warning-bg: #fdf3e3;
+  --warning-ink: #92620a;
+  --danger-bg: #fbe9e9;
+  --danger-ink: #a32626;
+  --danger-strong: #c23b3b;
+
+  /* Tema oscuro — panel interno LISA */
+  --dark-bg: #0b1220;
+  --dark-surface: #121b2e;
+  --dark-surface-raised: #17223a;
+  --dark-border: #263352;
+  --dark-ink: #eef2fb;
+  --dark-ink-muted: #9fadc8;
+
+  --font-display: 'Sora', 'Segoe UI', system-ui, sans-serif;
+  --font-body: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', 'SFMono-Regular', Consolas, monospace;
+
+  --radius-sm: 0.6rem;
+  --radius-md: 1rem;
+  --radius-lg: 1.6rem;
+  --shadow-card: 0 0.1rem 0.3rem rgba(15, 42, 74, 0.06), 0 0.8rem 2.4rem rgba(15, 42, 74, 0.08);
+  --shadow-float: 0 1.2rem 3.2rem rgba(10, 20, 40, 0.18);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --paper: #0c1322;
+    --surface: #121b2e;
+    --surface-sunken: #0e1729;
+    --border: #263352;
+    --ink: #eef2fb;
+    --ink-muted: #9fadc8;
+    --ink-faint: #6d7ba0;
+    --navy-100: #17223a;
+  }
+}
+
+:root[data-theme='dark'] {
+  --paper: #0c1322;
+  --surface: #121b2e;
+  --surface-sunken: #0e1729;
+  --border: #263352;
+  --ink: #eef2fb;
+  --ink-muted: #9fadc8;
+  --ink-faint: #6d7ba0;
+  --navy-100: #17223a;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 10px;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 1.6rem;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  color: var(--ink);
+  margin: 0;
+  text-wrap: balance;
+}
+
+p {
+  margin: 0;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 0.2rem solid var(--lisa-blue);
+  outline-offset: 0.2rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+#root {
+  min-height: 100vh;
+}
