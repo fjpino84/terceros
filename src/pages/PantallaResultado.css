@@ -305,8 +305,16 @@
 }
 
 @media (max-width: 900px) {
-  .resultado--exito {
+  .resultado--exito,
+  .resultado--rechazo {
     grid-template-columns: 1fr;
+  }
+
+  /* Mensaje principal arriba, los tres contactos debajo. */
+  .rechazo__pasos ul {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(24rem, 1fr));
+    gap: 1.6rem;
   }
 }
 
