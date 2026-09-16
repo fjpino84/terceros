@@ -287,21 +287,21 @@
 }
 
 .metricas__detalle {
-  font-size: 1.35rem;
+  font-size: 1.5rem;
   line-height: 1.45;
-  color: var(--dark-ink-muted);
+  color: var(--dark-ink);
 }
 
 .cita {
   margin: 0;
   padding: 1.8rem 2rem;
   border-radius: var(--radius-md);
-  background: rgba(255, 255, 255, 0.06);
+  background: rgba(255, 255, 255, 0.09);
   border-left: 0.3rem solid var(--lisa-teal);
-  font-size: 1.4rem;
+  font-size: 1.55rem;
   font-style: italic;
   line-height: 1.6;
-  color: var(--dark-ink);
+  color: #fff;
 }
 
 @media (max-width: 1000px) {
