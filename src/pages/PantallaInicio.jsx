@@ -1,20 +1,31 @@
+import { Fragment } from 'react';
 import Icon from '../components/ui/Icon.jsx';
 import { useCase } from '../context/CaseContext.jsx';
 import logoAseguradora from '../assets/logos/logo-aseguradora-claro.png';
 import logoLisa from '../assets/logos/logo-lisa.png';
 import './PantallaInicio.css';
 
-const PREGUNTAS_MANUALES = [
-  { icono: 'id', texto: '¿Es la cédula correcta?' },
-  { icono: 'car', texto: '¿La denuncia corresponde al siniestro?' },
-  { icono: 'calendar', texto: '¿El registro sigue vigente?' },
-];
-
-const CONSECUENCIAS = [
-  'Analistas senior atrapados en tareas de bajo valor',
-  'Criterios distintos entre revisores (subjetividad)',
-  'Reclamos que se estancan por falta de seguimiento',
-  'Mayor exposición a fraude no detectado a tiempo',
+const PROBLEMAS = [
+  {
+    problema: 'Capacidad operativa insuficiente: número de analistas por debajo de la carga de trabajo real.',
+    costo: ['', 'Backlog', ' creciente de casos y tiempos de respuesta excesivos.'],
+  },
+  {
+    problema: 'Procesos actuales mayormente manuales y fragmentados.',
+    costo: ['Baja eficiencia y mayor probabilidad de ', 'errores humanos.'],
+  },
+  {
+    problema: 'Atención tardía de reclamos.',
+    costo: ['', 'Impacto negativo', ' en la reputación de la compañía.'],
+  },
+  {
+    problema: 'Reclamos que escalan a instancias de mediación por tiempos excesivos.',
+    costo: ['', 'Costos adicionales', ' (honorarios legales, acuerdos desfavorables, tiempo de personal).'],
+  },
+  {
+    problema: 'Falta de priorización automática o inteligencia en la derivación de casos.',
+    costo: ['Uso ineficiente de recursos humanos y prolongación de los tiempos de respuesta.'],
+  },
 ];
 
 const METRICAS = [
@@ -47,30 +58,23 @@ export default function PantallaInicio() {
           <section className="contexto-col">
             <p className="contexto-col__eyebrow">El punto de partida</p>
             <h2 className="contexto-col__title">El costo oculto de «leer» papeles</h2>
-            <p className="contexto-col__texto">
-              Hoy, un analista invierte gran parte de su día revisando manualmente si la cédula es real,
-              si el registro está vigente o si la denuncia a la aseguradora es correcta. Es un trabajo
-              repetitivo, lento y propenso al error humano por cansancio visual.
-            </p>
 
-            <ul className="preguntas">
-              {PREGUNTAS_MANUALES.map((pregunta) => (
-                <li key={pregunta.texto} className="preguntas__item">
-                  <span className="preguntas__icon">
-                    <Icon nombre={pregunta.icono} size={20} />
-                  </span>
-                  {pregunta.texto}
-                </li>
+            <div className="problemas">
+              <p className="problemas__head problemas__head--ancho">Principales problemas operativos actuales</p>
+              <p className="problemas__head">Costos ocultos en el proceso</p>
+
+              {PROBLEMAS.map((fila) => (
+                <Fragment key={fila.problema}>
+                  <p className="problemas__problema">{fila.problema}</p>
+                  <span className="problemas__flecha" aria-hidden="true" />
+                  <p className="problemas__costo">
+                    {/* Los elementos impares del array van resaltados. */}
+                    {fila.costo.map((parte, i) =>
+                      i % 2 === 1 ? <strong key={i}>{parte}</strong> : <span key={i}>{parte}</span>,
+                    )}
+                  </p>
+                </Fragment>
               ))}
-            </ul>
-
-            <div className="consecuencias">
-              <p className="consecuencias__title">Consecuencias para la aseguradora</p>
-              <ul>
-                {CONSECUENCIAS.map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
             </div>
           </section>
 
