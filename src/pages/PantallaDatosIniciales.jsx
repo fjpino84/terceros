@@ -1,60 +1,21 @@
-import { useState } from 'react';
 import Icon from '../components/ui/Icon.jsx';
 import Boton from '../components/ui/Boton.jsx';
 import Banner from '../components/ui/Banner.jsx';
 import ClientShell from '../components/layout/ClientShell.jsx';
 import { useCase } from '../context/CaseContext.jsx';
-import { datosFormulario } from '../data/mockCase.js';
 import './PantallaDatosIniciales.css';
 
 export default function PantallaDatosIniciales() {
   const { formulario, actualizarFormulario, irA } = useCase();
-  const [errores, setErrores] = useState({});
-  const [patenteVerificada, setPatenteVerificada] = useState(false);
-
+  // Los campos vienen prellenados con el caso demo y el asegurado ya figura como encontrado.
   const manejarCambio = (campo) => (evento) => {
     const valor = evento.target.type === 'checkbox' ? evento.target.checked : evento.target.value;
     actualizarFormulario({ [campo]: valor });
-    if (campo === 'conAbogado') return;
-    if (campo === 'patenteAsegurado') {
-      setPatenteVerificada(false);
-      setErrores((prev) => ({ ...prev, patenteAsegurado: undefined }));
-    }
   };
 
   const manejarEnvio = (evento) => {
     evento.preventDefault();
-    const nuevosErrores = {};
-    if (!/^\d{7,8}$/.test(formulario.dni)) {
-      nuevosErrores.dni = 'Ingresá un DNI válido (7 u 8 dígitos).';
-    }
-    if (formulario.nombreApellido.trim().length < 3) {
-      nuevosErrores.nombreApellido = 'Ingresá tu nombre y apellido.';
-    }
-    if (formulario.patenteReclamante.trim().length < 6) {
-      nuevosErrores.patenteReclamante = 'Ingresá una patente válida.';
-    }
-    if (formulario.marcaVehiculo.trim().length < 2) {
-      nuevosErrores.marcaVehiculo = 'Ingresá la marca de tu vehículo.';
-    }
-    if (!formulario.fechaSiniestro) {
-      nuevosErrores.fechaSiniestro = 'Indicá la fecha del siniestro.';
-    }
-    if (formulario.localidadSiniestro.trim().length < 2) {
-      nuevosErrores.localidadSiniestro = 'Indicá la localidad del siniestro.';
-    }
-    const patenteIngresada = formulario.patenteAsegurado.trim().toUpperCase().replace(/[\s-]/g, '');
-    const patenteEsperada = datosFormulario.patenteAseguradoValida.replace(/[\s-]/g, '');
-    if (patenteIngresada !== patenteEsperada) {
-      nuevosErrores.patenteAsegurado = 'No encontramos esa patente entre nuestros asegurados.';
-      setPatenteVerificada(false);
-    } else {
-      setPatenteVerificada(true);
-    }
-    setErrores(nuevosErrores);
-    if (Object.keys(nuevosErrores).length === 0) {
-      irA('documentos');
-    }
+    irA('documentos');
   };
 
   return (
@@ -101,7 +62,7 @@ export default function PantallaDatosIniciales() {
           <form className="datos-iniciales__form" onSubmit={manejarEnvio} noValidate>
             <div className="campo">
               <label htmlFor="dni">N° de DNI del reclamante</label>
-              <div className={`campo__control ${errores.dni ? 'campo__control--error' : ''}`}>
+              <div className={`campo__control`}>
                 <input
                   id="dni"
                   name="dni"
@@ -113,12 +74,11 @@ export default function PantallaDatosIniciales() {
                 />
                 <Icon nombre="id" size={18} />
               </div>
-              {errores.dni && <span className="campo__error">{errores.dni}</span>}
             </div>
 
             <div className="campo">
               <label htmlFor="nombreApellido">Nombre y apellido del conductor</label>
-              <div className={`campo__control ${errores.nombreApellido ? 'campo__control--error' : ''}`}>
+              <div className={`campo__control`}>
                 <input
                   id="nombreApellido"
                   name="nombreApellido"
@@ -129,12 +89,11 @@ export default function PantallaDatosIniciales() {
                 />
                 <Icon nombre="user" size={18} />
               </div>
-              {errores.nombreApellido && <span className="campo__error">{errores.nombreApellido}</span>}
             </div>
 
             <div className="campo">
               <label htmlFor="patenteReclamante">Patente de tu vehículo (tercero)</label>
-              <div className={`campo__control ${errores.patenteReclamante ? 'campo__control--error' : ''}`}>
+              <div className={`campo__control`}>
                 <input
                   id="patenteReclamante"
                   name="patenteReclamante"
@@ -145,12 +104,11 @@ export default function PantallaDatosIniciales() {
                 />
                 <Icon nombre="car" size={18} />
               </div>
-              {errores.patenteReclamante && <span className="campo__error">{errores.patenteReclamante}</span>}
             </div>
 
             <div className="campo">
               <label htmlFor="marcaVehiculo">Marca de tu vehículo</label>
-              <div className={`campo__control ${errores.marcaVehiculo ? 'campo__control--error' : ''}`}>
+              <div className={`campo__control`}>
                 <input
                   id="marcaVehiculo"
                   name="marcaVehiculo"
@@ -161,12 +119,11 @@ export default function PantallaDatosIniciales() {
                 />
                 <Icon nombre="car" size={18} />
               </div>
-              {errores.marcaVehiculo && <span className="campo__error">{errores.marcaVehiculo}</span>}
             </div>
 
             <div className="campo">
               <label htmlFor="fechaSiniestro">Fecha del siniestro</label>
-              <div className={`campo__control ${errores.fechaSiniestro ? 'campo__control--error' : ''}`}>
+              <div className={`campo__control`}>
                 <input
                   id="fechaSiniestro"
                   name="fechaSiniestro"
@@ -176,12 +133,11 @@ export default function PantallaDatosIniciales() {
                 />
                 <Icon nombre="calendar" size={18} />
               </div>
-              {errores.fechaSiniestro && <span className="campo__error">{errores.fechaSiniestro}</span>}
             </div>
 
             <div className="campo">
               <label htmlFor="localidadSiniestro">Localidad del siniestro</label>
-              <div className={`campo__control ${errores.localidadSiniestro ? 'campo__control--error' : ''}`}>
+              <div className={`campo__control`}>
                 <input
                   id="localidadSiniestro"
                   name="localidadSiniestro"
@@ -192,18 +148,15 @@ export default function PantallaDatosIniciales() {
                 />
                 <Icon nombre="location" size={18} />
               </div>
-              {errores.localidadSiniestro && <span className="campo__error">{errores.localidadSiniestro}</span>}
             </div>
 
             <div className="campo campo--ancho">
               <label htmlFor="patenteAsegurado">
                 Patente del asegurado (compañía)
-                {patenteVerificada && <span className="campo__badge">Verificada</span>}
+                <span className="campo__badge">Verificada</span>
               </label>
               <div
-                className={`campo__control ${errores.patenteAsegurado ? 'campo__control--error' : ''} ${
-                  patenteVerificada ? 'campo__control--verificado' : ''
-                }`}
+                className="campo__control campo__control--verificado"
               >
                 <input
                   id="patenteAsegurado"
@@ -213,9 +166,8 @@ export default function PantallaDatosIniciales() {
                   value={formulario.patenteAsegurado}
                   onChange={manejarCambio('patenteAsegurado')}
                 />
-                <Icon nombre={patenteVerificada ? 'checkCircle' : 'car'} size={18} />
+                <Icon nombre="checkCircle" size={18} />
               </div>
-              {errores.patenteAsegurado && <span className="campo__error">{errores.patenteAsegurado}</span>}
             </div>
 
             <div className="campo campo--ancho campo--check">
@@ -231,14 +183,12 @@ export default function PantallaDatosIniciales() {
               </label>
             </div>
 
-            {patenteVerificada && (
-              <div className="campo--ancho">
+                          <div className="campo--ancho">
                 <Banner tono="exito">
                   La patente se ha encontrado con éxito, por lo que esperamos resolver el siniestro a la
                   brevedad.
                 </Banner>
               </div>
-            )}
 
             <div className="datos-iniciales__actions">
               <Boton tipo="submit">

@@ -10,20 +10,23 @@ export const PASOS = [
   { id: 'resultado', etiqueta: 'Resultados' },
 ];
 
+// Datos del caso demo: el formulario inicial arranca prellenado.
+const FORMULARIO_PRELLENADO = {
+  dni: '20345678',
+  nombreApellido: 'Juan Pérez',
+  patenteReclamante: 'ABC-123',
+  marcaVehiculo: 'Chevrolet',
+  patenteAsegurado: 'QWE123',
+  fechaSiniestro: '2026-11-05',
+  localidadSiniestro: 'Rosario',
+  conAbogado: false,
+};
+
 const ESTADO_INICIAL = {
   pantalla: 'inicio',
   escenario: null,
   referencia: null,
-  formulario: {
-    dni: '',
-    nombreApellido: '',
-    patenteReclamante: '',
-    marcaVehiculo: '',
-    patenteAsegurado: '',
-    fechaSiniestro: '',
-    localidadSiniestro: '',
-    conAbogado: false,
-  },
+  formulario: FORMULARIO_PRELLENADO,
   documentosSubidos: {},
   facturaPendiente: false,
   facturaValidada: false,
@@ -70,6 +73,7 @@ export function CaseProvider({ children }) {
           escenario,
           referencia: generarReferencia(),
           pantalla: 'datos',
+          formulario: FORMULARIO_PRELLENADO,
           documentosSubidos: {},
           facturaPendiente: false,
           facturaValidada: false,
