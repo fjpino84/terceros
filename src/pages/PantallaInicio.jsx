@@ -127,7 +127,7 @@ export default function PantallaInicio() {
             <span className="scenario-card__body">
               <span className="scenario-card__title">Caso con licencia vencida y fraude</span>
               <span className="scenario-card__desc">
-                Licencia vencida y presupuesto adulterado. LISA rechaza y alerta al equipo de fraude.
+                Licencia vencida y factura anterior al siniestro. LISA rechaza los documentos y solicita su reaporte.
               </span>
             </span>
             <Icon nombre="arrowRight" size={20} className="scenario-card__arrow" />

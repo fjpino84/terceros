@@ -47,7 +47,7 @@ export default function DocumentDropzone({ documento, archivo, pendiente = false
           <>
             <Icon nombre="alertCircle" size={22} />
             <span className="dropzone__label">LISA no pudo validar este documento</span>
-            <span className="dropzone__hint">Hacé clic para subir el presupuesto correcto</span>
+            <span className="dropzone__hint">Hacé clic para subir la factura correcta</span>
           </>
         ) : archivo ? (
           <>

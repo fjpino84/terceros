@@ -2,9 +2,15 @@ import Icon from '../components/ui/Icon.jsx';
 import Boton from '../components/ui/Boton.jsx';
 import ClientShell from '../components/layout/ClientShell.jsx';
 import { useCase } from '../context/CaseContext.jsx';
+import { documentosNoAportados } from '../data/mockCase.js';
 import './PantallaResultado.css';
 
 const PROXIMOS_PASOS = [
+  {
+    icono: 'upload',
+    titulo: 'Volvé a aportar los documentos',
+    texto: `Marcamos como "No Aportado": ${documentosNoAportados.join(' y ')}. Te enviamos la solicitud de reaporte.`,
+  },
   {
     icono: 'location',
     titulo: 'Acercate a una sucursal',

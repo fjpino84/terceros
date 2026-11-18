@@ -6,7 +6,7 @@ import Modal from '../components/ui/Modal.jsx';
 import ClientShell from '../components/layout/ClientShell.jsx';
 import DocumentDropzone from '../components/documents/DocumentDropzone.jsx';
 import { useCase } from '../context/CaseContext.jsx';
-import { documentosBase } from '../data/mockCase.js';
+import { obtenerDocumentos } from '../data/mockCase.js';
 import './PantallaCargaDocumentos.css';
 
 const GARANTIAS = [
@@ -16,10 +16,11 @@ const GARANTIAS = [
 ];
 
 export default function PantallaCargaDocumentos() {
-  const { documentosSubidos, presupuestoPendiente, marcarDocumentoSubido, resolverPresupuestoPendiente, irA } =
+  const { formulario, documentosSubidos, facturaPendiente, marcarDocumentoSubido, resolverFacturaPendiente, irA } =
     useCase();
 
   const [modalVisto, setModalVisto] = useState(false);
+  const documentosBase = obtenerDocumentos(formulario.conAbogado);
 
   const todosCargados = documentosBase.every((doc) => documentosSubidos[doc.id]);
 
@@ -31,8 +32,8 @@ export default function PantallaCargaDocumentos() {
   };
 
   const manejarSeleccion = (id, archivo) => {
-    if (id === 'presupuesto' && presupuestoPendiente) {
-      resolverPresupuestoPendiente(archivo);
+    if (id === 'factura' && facturaPendiente) {
+      resolverFacturaPendiente(archivo);
       return;
     }
 
@@ -54,9 +55,9 @@ export default function PantallaCargaDocumentos() {
       <div className="carga-docs">
         <div className="carga-docs__header">
           <h1>Documentación Requerida</h1>
-          {presupuestoPendiente ? (
+          {facturaPendiente ? (
             <Banner tono="alerta">
-              El presupuesto que recibimos no pudo validarse. Cargue nuevamente el documento correcto para
+              La factura que recibimos no pudo validarse. Cargue nuevamente el documento correcto para
               continuar.
             </Banner>
           ) : (
@@ -73,7 +74,7 @@ export default function PantallaCargaDocumentos() {
                 key={documento.id}
                 documento={documento}
                 archivo={documentosSubidos[documento.id]}
-                pendiente={documento.id === 'presupuesto' && presupuestoPendiente}
+                pendiente={documento.id === 'factura' && facturaPendiente}
                 onSeleccionar={manejarSeleccion}
               />
             ))}
@@ -93,7 +94,7 @@ export default function PantallaCargaDocumentos() {
             </div>
           </div>
 
-          {!presupuestoPendiente && (
+          {!facturaPendiente && (
             <div className="carga-docs__actions">
               <Boton tipo="submit" disabled={!todosCargados}>
                 Perfecto, ya tenemos sus documentos
@@ -104,18 +105,18 @@ export default function PantallaCargaDocumentos() {
         </form>
       </div>
 
-      {presupuestoPendiente && !modalVisto && (
+      {facturaPendiente && !modalVisto && (
         <Modal
           tono="alerta"
-          titulo="Falta subir el presupuesto"
+          titulo="Falta subir la factura de reparación"
           acciones={
             <Boton variante="secundario" onClick={() => setModalVisto(true)}>
               Entendido
             </Boton>
           }
         >
-          El archivo cargado en &quot;Presupuestos y facturas&quot; corresponde a una licencia de conducir,
-          no a un presupuesto de reparación. Por favor suba el documento correcto para continuar con la
+          El archivo cargado en &quot;Factura de reparación&quot; corresponde a una licencia de conducir,
+          no a una factura de reparación. Por favor suba el documento correcto para continuar con la
           validación de su siniestro.
         </Modal>
       )}

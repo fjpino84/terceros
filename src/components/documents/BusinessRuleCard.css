@@ -90,3 +90,12 @@
     align-items: flex-start;
   }
 }
+
+.rule-card--alerta .rule-card__icon {
+  background: rgba(214, 158, 46, 0.2);
+  color: #f2c879;
+}
+
+.rule-card--alerta {
+  border-color: rgba(214, 158, 46, 0.4);
+}

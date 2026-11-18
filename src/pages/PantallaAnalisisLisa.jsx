@@ -8,7 +8,7 @@ import BusinessRuleCard from '../components/documents/BusinessRuleCard.jsx';
 import { useAnalysisSequence } from '../hooks/useAnalysisSequence.js';
 import { useCase } from '../context/CaseContext.jsx';
 import {
-  documentosBase,
+  obtenerDocumentos,
   lecturaExito,
   lecturaRechazo,
   reglasNegocioExito,
@@ -16,38 +16,41 @@ import {
 } from '../data/mockCase.js';
 import './PantallaAnalisisLisa.css';
 
-const ORDEN_DOCUMENTOS = documentosBase.map((doc) => doc.id);
-const DOCUMENTOS_PREVIOS_AL_PRESUPUESTO = ORDEN_DOCUMENTOS.filter((id) => id !== 'presupuesto');
 
 export default function PantallaAnalisisLisa() {
-  const { escenario, referencia, presupuestoPendiente, presupuestoValidado, marcarPresupuestoPendiente, irA } =
+  const { formulario, escenario, referencia, facturaPendiente, facturaValidada, marcarFacturaPendiente, irA } =
     useCase();
   const esExito = escenario === 'exito';
 
-  // En el escenario de éxito, LISA solo da por bueno el presupuesto tras el ciclo de corrección.
-  const presupuestoCorregido = !esExito || presupuestoValidado;
+  // Los documentos analizados dependen del formulario (el carnet de abogado solo si hay abogado).
+  const documentosBase = useMemo(() => obtenerDocumentos(formulario.conAbogado), [formulario.conAbogado]);
+  const ORDEN_DOCUMENTOS = useMemo(() => documentosBase.map((doc) => doc.id), [documentosBase]);
+  const DOCUMENTOS_PREVIOS_A_LA_FACTURA = ORDEN_DOCUMENTOS.filter((id) => id !== 'factura');
+
+  // En el escenario de éxito, LISA solo da por buena la factura tras el ciclo de corrección.
+  const facturaCorregida = !esExito || facturaValidada;
 
   const [mostrarModalFraude, setMostrarModalFraude] = useState(false);
   const [fraudeAlertaEnviada, setFraudeAlertaEnviada] = useState(false);
 
   const lecturas = useMemo(() => {
     const base = esExito ? lecturaExito : lecturaRechazo;
-    if (esExito && !presupuestoCorregido) {
+    if (esExito && !facturaCorregida) {
       return {
         ...base,
-        presupuesto: {
+        factura: {
           estado: 'alerta',
-          titulo: 'Documento no reconocido como presupuesto',
+          titulo: 'Documento no reconocido como factura',
           campos: [{ etiqueta: 'Detectado como', valor: 'Licencia de conducir' }],
         },
       };
     }
     return base;
-  }, [esExito, presupuestoCorregido]);
+  }, [esExito, facturaCorregida]);
 
-  // Al volver desde Carga de Documentos con el presupuesto corregido, los documentos que ya
-  // habían sido validados se muestran directo con su veredicto: solo se re-anima el presupuesto.
-  const documentosYaResueltos = presupuestoValidado ? DOCUMENTOS_PREVIOS_AL_PRESUPUESTO : [];
+  // Al volver desde Carga de Documentos con la factura corregida, los documentos que ya
+  // habían sido validados se muestran directo con su veredicto: solo se re-anima la factura.
+  const documentosYaResueltos = facturaValidada ? DOCUMENTOS_PREVIOS_A_LA_FACTURA : [];
 
   const { fases, indiceActual, totalAAnimar, terminado } = useAnalysisSequence(
     ORDEN_DOCUMENTOS,
@@ -56,31 +59,35 @@ export default function PantallaAnalisisLisa() {
     documentosYaResueltos,
   );
 
-  // Cuando LISA detecta que el presupuesto no es válido, devuelve al cliente a Carga de
+  // Cuando LISA detecta que la factura no es válida, devuelve al cliente a Carga de
   // Documentos en vez de resolver el problema en esta consola interna.
   useEffect(() => {
-    if (esExito && terminado && !presupuestoCorregido && !presupuestoPendiente) {
-      marcarPresupuestoPendiente();
+    if (esExito && terminado && !facturaCorregida && !facturaPendiente) {
+      marcarFacturaPendiente();
     }
-  }, [esExito, terminado, presupuestoCorregido, presupuestoPendiente, marcarPresupuestoPendiente]);
+  }, [esExito, terminado, facturaCorregida, facturaPendiente, marcarFacturaPendiente]);
 
   const archivoParaFila = (id) => {
-    if (id === 'presupuesto' && esExito && !presupuestoCorregido) {
+    if (id === 'factura' && esExito && !facturaCorregida) {
       return 'licencia.png';
     }
-    if (id === 'presupuesto') {
+    if (id === 'factura') {
       return 'presupuesto.png';
     }
     return documentosBase.find((doc) => doc.id === id)?.archivo;
   };
 
-  const reglas = esExito ? reglasNegocioExito : reglasNegocioRechazo;
+  const reglasBase = esExito ? reglasNegocioExito : reglasNegocioRechazo;
+  const reglas = useMemo(
+    () => reglasBase.filter((regla) => ORDEN_DOCUMENTOS.includes(regla.documento)),
+    [reglasBase, ORDEN_DOCUMENTOS],
+  );
   const ordenReglas = useMemo(() => reglas.map((regla) => regla.id), [reglas]);
   const resultadosReglas = useMemo(
     () => Object.fromEntries(reglas.map((regla) => [regla.id, regla])),
     [reglas],
   );
-  const documentosListos = terminado && presupuestoCorregido;
+  const documentosListos = terminado && facturaCorregida;
 
   const {
     fases: fasesReglas,
@@ -97,7 +104,7 @@ export default function PantallaAnalisisLisa() {
     return undefined;
   }, [esExito, veredictoListo]);
 
-  const estadoFinal = esExito ? 'PASSED' : 'RECHAZADO — FRAUDE / DOCUMENTACIÓN INVÁLIDA';
+  const estadoFinal = esExito ? 'APROBADO' : 'RECHAZADO — DOCUMENTOS NO APORTADOS';
 
   const puedeAvanzar = veredictoListo;
 
@@ -105,8 +112,8 @@ export default function PantallaAnalisisLisa() {
     totalAAnimar === 0 ? 100 : Math.round((Math.min(indiceActual, totalAAnimar) / totalAAnimar) * 100);
 
   let tonoEstado = 'neutro';
-  let tituloEstado = presupuestoValidado ? 'Revalidando presupuesto…' : 'Analizando documentación…';
-  let descripcionEstado = presupuestoValidado
+  let tituloEstado = facturaValidada ? 'Revalidando factura…' : 'Analizando documentación…';
+  let descripcionEstado = facturaValidada
     ? 'Se recibió el documento correcto. LISA está terminando de validar el caso.'
     : `Procesando documento ${Math.min(indiceActual + 1, totalAAnimar)} de ${totalAAnimar}.`;
 
@@ -114,8 +121,8 @@ export default function PantallaAnalisisLisa() {
     tonoEstado = esExito ? 'ok' : 'error';
     tituloEstado = estadoFinal;
     descripcionEstado = esExito
-      ? 'Análisis completado con éxito. Todos los documentos fueron verificados.'
-      : 'Se detectaron inconsistencias graves. El caso requiere revisión del equipo de fraude.';
+      ? 'Análisis completado con éxito. Todos los documentos cumplen las reglas de negocio.'
+      : 'Se incumplieron reglas de negocio. El motor rechazó los documentos y solicitó su reaporte.';
   }
 
   return (
@@ -183,7 +190,7 @@ export default function PantallaAnalisisLisa() {
       {mostrarModalFraude && !fraudeAlertaEnviada && (
         <Modal
           tono="error"
-          titulo="Alerta enviada al equipo de fraude"
+          titulo="Acciones de control ejecutadas"
           acciones={
             <Boton
               variante="secundario"
@@ -196,9 +203,9 @@ export default function PantallaAnalisisLisa() {
             </Boton>
           }
         >
-          Se detectaron documentos duplicados y una adulteración en fecha y monto del presupuesto. El caso
-          <strong> {referencia}</strong> fue marcado para revisión manual y el equipo de fraude ya fue
-          notificado automáticamente.
+          La licencia de conducir está vencida más allá de la tolerancia de 90 días y la factura fue emitida
+          antes del siniestro. El resto de los documentos se aprobó, algunos con mensaje de alerta. En el caso <strong>{referencia}</strong> se rechazó la iniciativa, los
+          documentos quedaron marcados como &quot;No Aportado&quot; y se solicitó automáticamente su reaporte.
         </Modal>
       )}
     </LisaConsoleShell>

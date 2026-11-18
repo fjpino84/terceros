@@ -16,12 +16,17 @@ const ESTADO_INICIAL = {
   referencia: null,
   formulario: {
     dni: '',
+    nombreApellido: '',
     patenteReclamante: '',
+    marcaVehiculo: '',
     patenteAsegurado: '',
+    fechaSiniestro: '',
+    localidadSiniestro: '',
+    conAbogado: false,
   },
   documentosSubidos: {},
-  presupuestoPendiente: false,
-  presupuestoValidado: false,
+  facturaPendiente: false,
+  facturaValidada: false,
 };
 
 const generarReferencia = () => {
@@ -32,7 +37,13 @@ const generarReferencia = () => {
 const cargarEstadoGuardado = () => {
   try {
     const guardado = window.localStorage.getItem(CLAVE_ALMACENAMIENTO);
-    return guardado ? { ...ESTADO_INICIAL, ...JSON.parse(guardado) } : ESTADO_INICIAL;
+    if (!guardado) return ESTADO_INICIAL;
+    const parseado = JSON.parse(guardado);
+    return {
+      ...ESTADO_INICIAL,
+      ...parseado,
+      formulario: { ...ESTADO_INICIAL.formulario, ...parseado.formulario },
+    };
   } catch {
     return ESTADO_INICIAL;
   }
@@ -60,8 +71,8 @@ export function CaseProvider({ children }) {
           referencia: generarReferencia(),
           pantalla: 'datos',
           documentosSubidos: {},
-          presupuestoPendiente: false,
-          presupuestoValidado: false,
+          facturaPendiente: false,
+          facturaValidada: false,
         })),
       actualizarFormulario: (campos) =>
         setEstado((prev) => ({ ...prev, formulario: { ...prev.formulario, ...campos } })),
@@ -70,19 +81,19 @@ export function CaseProvider({ children }) {
           ...prev,
           documentosSubidos: { ...prev.documentosSubidos, [id]: archivo },
         })),
-      marcarPresupuestoPendiente: () =>
+      marcarFacturaPendiente: () =>
         setEstado((prev) => ({
           ...prev,
-          presupuestoPendiente: true,
-          documentosSubidos: { ...prev.documentosSubidos, presupuesto: null },
+          facturaPendiente: true,
+          documentosSubidos: { ...prev.documentosSubidos, factura: null },
           pantalla: 'documentos',
         })),
-      resolverPresupuestoPendiente: (archivo) =>
+      resolverFacturaPendiente: (archivo) =>
         setEstado((prev) => ({
           ...prev,
-          presupuestoPendiente: false,
-          presupuestoValidado: true,
-          documentosSubidos: { ...prev.documentosSubidos, presupuesto: archivo },
+          facturaPendiente: false,
+          facturaValidada: true,
+          documentosSubidos: { ...prev.documentosSubidos, factura: archivo },
           pantalla: 'analisis',
         })),
       reiniciar: () => {
